@@ -1,64 +1,82 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <script src="js/vue.min.js"></script>
     <script src="js/qrious.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Gerador de QRCode</title>
-</head>
+    <script src="js/JsBarcode.all.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Gerador de Codigos</title>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <h1>{{title}}</h1>
-        <div>
-            <input type="text" size="25" placeholder="Digite para gerar..." 
-            :value="text"  @input="onData">
-        
-        </div>
+      <h1>{{title1}}</h1>
+      <div>
+        <input
+          type="text1"
+          size="25"
+          placeholder="Digite para gerar..."
+          :value="text1"
+          @input="onData"
+        />
+      </div>
 
-        <div v-if="text" class="output">
-            <img :src="newQRCode" alt="QRCode">
+      <div v-if="text1" class="output">
+        <img :src="newQRCode" alt="QRCode" />
+      </div>
+      <div>
+        <h1>{{title2}}</h1>
+        <input
+          type="text2"
+          size="25"
+          placeholder="Digite para gerar..."
+          :value="text2"
+          @input="onData2"
+        />
+      </div>
+      <div v-if="text2" class="output">
+        <img :src="newBarcode" alt="Barcode" />
+      </div>
+     
+    
+    </div>
 
-        </div>
+    <script>
+      
 
+      new Vue({
+        el: "#app",
+        data: {
+          title1: "Gerador QRCode",
+          title2: "Gerador de BarCode",
+          text1: "----- by Jonas Grossi ------",
+          text2: "01111000222200555",
+          qrcode: new QRious({ size: 200 }),
+        },
+      
 
-        </div>
-
-        <script>
-
-            new Vue({
-
-                el: '#app',
-                data: {
-                    title: 'Gerador QRCode',
-                    text: '----- by Jonas Grossi ------',
-                    qrcode: new QRious({ size: 300 })
-
-                },
-
-                computed: {
-                    newQRCode() {
-
-                        this.qrcode.value = this.text
-                        return this.qrcode.toDataURL()
-
-                    }
-
-                },
-                methods: {
-                    onData(event) {
-                        this.text = event.target.value
-                    }
-                }
-
-            })
-
-
-
-
-        </script>
-</body>
-
+        computed: {
+          newQRCode() {
+            this.qrcode.value = this.text;
+            return this.qrcode.toDataURL();
+          },
+        },
+        methods: {
+          onData(event) {
+            this.text = event.target.value;
+          },
+          newBarcode() {
+            this.barcode.value = this.text;
+            return this.Barcode.toDataURL();
+          },
+        },
+        methods2: {
+          onData2(event) {
+            this.text = event.target.value;
+          },
+        },
+      });
+    </script>
+  </body>
 </html>
